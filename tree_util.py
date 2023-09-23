@@ -1,3 +1,6 @@
+from collections import deque
+
+
 class TreeNode:
     def __init__(self, value):
         self.value = value
@@ -45,6 +48,30 @@ class BinaryTree:
             print(node.value)
             self.inorder_traversal(node.right)
 
+    def print_levels(self):
+
+        if self.root is None:
+            return
+
+        node_queue = deque([self.root])
+        next_queue = deque()
+
+        while node_queue:
+
+            node = node_queue.popleft()
+            print(node.value, end=' ')
+
+            if node.left:
+                next_queue.append(node.left)
+
+            if node.right:
+                next_queue.append(node.right)
+
+            if len(node_queue) == 0:
+                print()
+                node_queue = next_queue
+                next_queue = deque()
+
 
 if __name__ == "__main__":
 
@@ -55,5 +82,5 @@ if __name__ == "__main__":
         tree.insert(i)
 
     tree.inorder_traversal(tree.root)
-
-
+    print("printing levels")
+    tree.print_levels()
