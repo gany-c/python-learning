@@ -19,7 +19,7 @@ class BinaryTree:
             self._recursive_insert(self.root, value)
 
     def _recursive_insert(self, current_node, value):
-        if current_node.value <= value:
+        if value <= current_node.value:
             if current_node.left is None:
                 current_node.left = TreeNode(value)
             else:
@@ -82,5 +82,7 @@ if __name__ == "__main__":
         tree.insert(i)
 
     tree.inorder_traversal(tree.root)
+    print("Pre-order")
+    tree.preorder_traversal(tree.root)
     print("printing levels")
     tree.print_levels()
