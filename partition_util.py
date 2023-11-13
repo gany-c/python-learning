@@ -38,6 +38,12 @@ def _explore_subset_sums(path: list[int], current_sum: int, start: int, input_li
 
 
 def get_subset_sum(target: int, input_list: list[int]) -> list[int]:
+    """
+    Check if any of the possible subsets adds up to a target sum
+    :param target:
+    :param input_list:
+    :return: returns the first such subset found.
+    """
 
     if target < 0 or len(input_list) <= 0:
         return []
