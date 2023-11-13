@@ -81,6 +81,7 @@ def get_k_subsets_of_equal_sum(k: int, input_list: list[int]) -> list[list[int]]
     subset_sum = list_sum/k
     out_list = []
 
+    # We can skip the recursive search for the last subset/ iteration, It is already there as the remainder
     while k > 1:
         # print(f" Debug 1  subset_sum = {subset_sum} ")
         # print(f" Debug 1  input_list = {input_list} ")
