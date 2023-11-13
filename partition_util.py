@@ -86,6 +86,9 @@ def get_k_subsets_of_equal_sum(k: int, input_list: list[int]) -> list[list[int]]
         # print(f" Debug 1  subset_sum = {subset_sum} ")
         # print(f" Debug 1  input_list = {input_list} ")
         subset = get_subset_sum(subset_sum, input_list)
+        if not subset:
+            print("Partitioning not possible")
+            return None
         # print(f" Debug 2  sum set = {subset}")
         out_list.append(subset)
         # GETTING THE DIFFERENCE OF 2 LISTS. '-' DOESN'T WORK
@@ -117,4 +120,19 @@ if __name__ == "__main__":
     """
     list_of_lists = get_k_subsets_of_equal_sum(3, [1, 5, 4, 2, 6, 3])
     print(f"list of lists = {list_of_lists}")
+
+    list_of_lists = get_k_subsets_of_equal_sum(3, [8, 4, 2, 13])
+    print(f"list of lists = {list_of_lists}")
+
+    list_of_lists = get_k_subsets_of_equal_sum(3, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
+    print(f"list of lists = {list_of_lists}")
+
+    import random
+    input_list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+    random.shuffle(input_list)
+    print(f" shuffled list = {input_list}")
+    list_of_lists = get_k_subsets_of_equal_sum(3, input_list)
+    print(f"list of lists = {list_of_lists}")
+
+
 
