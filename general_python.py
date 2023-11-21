@@ -286,8 +286,150 @@ print(new_vector)
 """
 Class inheritance and Exception Handling
 
+In python everything is a checked exception.
+Even runtime errors are subclasses of the Exception class.
+
+Not really BaseException is the superclass of all classes
+Exception is its sub class, and is the base class of all non fatal exceptions.
+
+Other sub-classes of BaseException include SystemExit produced by sys.exit()
+and KeyboardInterrupt. These are typically not meant to be handled
 """
 f = FileNotFoundError()
 print(isinstance(f, Exception))
 
+a = ValueError()
+print(isinstance(a, Exception))
+
+b = ZeroDivisionError()
+print(isinstance(b, Exception))
+
+se = SystemExit()
+print(isinstance(se, Exception))
+print("Is SystemExit and instance of BaseException? ", isinstance(se, BaseException))
+
+"""
+Simple try catch
+"""
+print("Looking for user input: ")
+while True:
+    try:
+        x = int(input("enter a valid number: "))
+        print(x)
+        break
+    except ValueError:
+        print("That's not a valid number")
+
+"""
+Except can catch multiple exceptions 
+"""
+try:
+    print("Just for fun")
+except (ValueError, RuntimeError, NameError):
+    print("You have raised one of the 3")
+
+"""
+Just like java, if there are multiple except clauses, put the 
+specific ones on top, the generalized ones at the bottom.
+"""
+
+
+class B(Exception):
+    pass
+
+
+class C(B):
+    pass
+
+
+class D(C):
+    pass
+
+"""
+raise the exceptions 1 by 1.
+The subclasses are on top, the superclasses are towards the bottom
+"""
+exception_classes = [B, C, D]
+for ex_class in exception_classes:
+    try:
+        raise ex_class()
+
+    except D:
+        print("Raised D")
+    except C:
+        print("Raised C")
+    except B:
+        print("Raised B")
+
+"""
+Just as in java, the Exception objects can be manipulated inside the handling block
+"""
+
+try:
+    raise Exception("Idli", "Dosa")
+except Exception as e:
+    print(e)
+    print(type(e))
+    print(e.args)
+
+    a, b = e.args
+    print(f"The args are {a}, {b}")
+
+
+"""
+You can chain exceptions using the "from" keyword, this will make it clearer
+Throwing another exception without "from" will also work 
+
+
+def err_func():
+    raise NameError
+
+try:
+    err_func()
+except NameError as ne:
+    raise RuntimeError from ne
+    
+"""
+
+try:
+    print("Hello - no errors here")
+except NameError:
+    print("This error shouldn't have happened")
+else:
+    print("This is being printed because there werent't any exceptions")
+finally:
+    print("This will always be printed")
+
+"""
+Read this https://docs.python.org/3/tutorial/errors.html
+for exception groups, adding notes to exceptions etc.
+
+File Handling:
+"""
+
+with open("input.txt", encoding="utf-8") as file_ref:
+
+    lines = file_ref.readlines()
+    print(lines)
+    for i, line in enumerate(lines):
+        print(f" line number {i} is {line}")
+    file_ref.close()
+
+"""
+Above was reading lines, below reads the whole file
+"""
+
+with open("input.txt", encoding="utf-8") as file_ref:
+    file_data = file_ref.read()
+    print(file_data)
+    file_ref.close()
+
+"""
+The open method takes 3 parameters
+1. File name/path
+2. Mode - read, write, append
+3, Encoding.
+"""
+with open("output_second.txt", 'w') as write_ref:
+    write_ref.write("This is a sample write to the file")
 
