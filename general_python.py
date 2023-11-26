@@ -433,3 +433,356 @@ The open method takes 3 parameters
 with open("output_second.txt", 'w') as write_ref:
     write_ref.write("This is a sample write to the file")
 
+"""
+The import statement combines two operations; 
+it searches for the named module, 
+then it binds the results of that search to a name in the local scope.
+"""
+
+# 2 ways of importing
+import random
+courses = ['SST', 'Science', 'English', 'Hindi']
+print(random.choice(courses))
+
+from sys import path
+print(path)
+# Now this path is just like a list, you can append locations to it and import from those locations.
+# i.e. it is equal to Java - classpath (finds java classes)
+
+print(random.__file__)
+# The above is called the dunder file, it is available in a few modules but not in sys etc
+
+"""
+When the __init__.py file is present in a directory, Python treats that directory as a package. 
+This file can be empty, or it can contain Python code that initializes the package. T
+This code is executed when the package is imported.
+
+In addition to initializing packages, __init__.py can also 
+be used to initialize individual modules within a package. 
+"""
+
+from email.mime.text import MIMEText
+arbitrary_mime_text = MIMEText("Mary had a little lamb")
+print(arbitrary_mime_text)
+
+import email
+some_mime = email.mime.text.MIMEText("hello hello hello")
+print(some_mime)
+
+from email.mime import text
+random_mime = text.MIMEText("xyz")
+print(random_mime)
+"""
+mypackage/
+├── __init__.py
+├── module1.py
+├── module2.py
+└── subpackage/
+    ├── __init__.py
+    ├── module3.py
+    └── module4.py
+
+The general structure 
+
+Packages are directories
+Sub Packages are directories
+Modules are files, they contain classes, variables etc.
+
+In import, the . operator is used to separate packages from sub packages or modules.
+Not modules from their contained entities
+
+but it can be done in the usage as above.
+
+Relative imports can also be done - . = current directory, .. = parent directory.
+"""
+
+if __name__ == "__main__":
+    # Check if __spec__ is defined (available in Python 3.4 and later)
+    print(__spec__)
+
+"""
+Class definitions:
+
+Empty classes
+"""
+
+class Employee:
+    pass
+
+emp = Employee()
+print(emp)
+
+
+emp.name = "Mashika De Alameida"
+print(emp.name)
+print(emp)
+
+"""
+With Constructor
+"""
+class Employee:
+    def __init__(self, name):
+        self._name = name
+
+emp_t = Employee("Karthika Saran")
+print(emp_t)
+print(emp_t._name)
+
+"""
+Instance methods
+"""
+class Employee:
+    def __init__(self, name):
+        self._name = name
+
+    def print_name(self):
+        print(self._name)
+
+
+emp_m = Employee("LJ")
+print(emp_m)
+emp_m.print_name()
+# You applied a method on an older version of the class which didn't have print_name :)
+Employee.print_name(emp_t)
+
+
+"""
+Class variables, changing in class vs changing in instance
+"""
+class Employee:
+
+    id = 100
+    # should not be assigned using self
+
+    def __init__(self, name):
+        self._name = name
+
+    def print_name(self):
+        print(self._name)
+
+e1 = Employee("Gany")
+e2 = Employee("Dhivya")
+print(f" the 2 employee ids are {e1.id}, {e2.id}")
+
+Employee.id = 200
+print(f" the 2 employee ids are {e1.id}, {e2.id}")
+
+e1.id = 300
+print(f" the 2 employee ids are {e1.id}, {e2.id}")
+
+"""
+Class methods, class methods as factory methods
+"""
+
+class Employee:
+
+    inc = 0.05
+    # should not be assigned using self
+
+    def __init__(self, first_name, last_name, salary):
+        self.first_name = first_name
+        self.last_name = last_name
+        self.salary = salary
+
+    def print_name(self):
+        print(self.first_name +" "+ self.last_name)
+
+    @classmethod
+    def create_from_str(cls, input_str):
+        first_name, last_name, salary = input_str.split("-")
+        return cls(first_name, last_name, float(salary))
+
+    @classmethod
+    def get_increment(cls, salary):
+        return cls.inc * salary + salary
+
+    def get_future_salary(self):
+        return Employee.get_increment(self.salary)
+
+    @staticmethod
+    def is_above_threshold(in_employee, threshold):
+        return in_employee.salary > threshold
+
+
+emp = Employee.create_from_str("Ram-Niranjan-5000")
+print(emp.print_name())
+print(emp.get_future_salary())
+print(Employee.is_above_threshold(emp, 4500))
+
+"""
+Class Inheritance
+"""
+
+class A:
+    def __init__(self):
+        print("I'm in Class A's init")
+
+a = A()
+
+class B(A):
+    def __init__(self):
+        print("I'm in Class B's init")
+        # so calling B's init is not going to call A's init automatically
+b = B()
+
+
+class C(A):
+    def __init__(self):
+        super().__init__()
+        # so the super class's init has to be explicitly called.
+        print("I'm in Class C's init")
+
+c = C()
+
+"""
+Multiple Inheritance
+"""
+class North:
+    def __init__(self):
+        print("In North constructor")
+
+
+class West(North):
+    def __init__(self):
+        print("In West constructor")
+        super().__init__()
+
+
+class East(North):
+    def __init__(self):
+        print("In East constructor")
+        super().__init__()
+
+
+class South(West, East):
+    def __init__(self):
+        print("In South constructor")
+        super().__init__()
+
+
+dakshin = South()
+# despite the diamond shaped hierarchy, the North constructor is called only once
+
+"""
+issubclass and isinstance
+"""
+print(f"is south a sub class of north? {issubclass(South, North)}")
+# so is instance works with super class also
+print(f"is dakshin an instance of north? {isinstance(dakshin, North)}")
+
+"""
+private methods
+"""
+
+class Shell:
+    def __inner_method(self):
+        print(self.val)
+
+    def outer_method(self):
+        self.__inner_method()
+        # class methods can invoke the private method
+
+    def __init__(self, val):
+        self.val = val
+
+s = Shell(55)
+
+# s.__inner_method() this method is private, can't be done
+s.outer_method()
+
+
+class SecondShell(Shell):
+
+    def __init__(self, val):
+        super().__init__(val)
+
+    def facade(self):
+        # self.__inner_method() private methods can't be seen by the subclass, just like java.
+        self.outer_method()
+
+
+ss = SecondShell(84)
+ss.facade()
+
+"""
+Super outside the constructor
+"""
+
+class City:
+    def __init__(self):
+        pass
+
+    def get_something(self):
+        return " Chodiye"
+
+class Bombay(City):
+    def __init__(self):
+        pass
+
+    def get_something(self):
+        return f"Hello Hi {super().get_something()}"
+
+b = Bombay()
+print(b.get_something())
+
+"""
+property annotation, getter and setter
+"""
+
+
+class ScalarRep:
+    """
+    observe the setter's annotation
+    """
+    inner_val = 0
+
+    @property
+    def get_vector(self):
+        return [self.inner_val, self.inner_val**2, self.inner_val**3]
+
+    @get_vector.setter
+    def set_vector(self, vector):
+        self.inner_val = vector[0]
+
+
+scalar = ScalarRep()
+scalar.set_vector = [2, 4, 8]
+print(scalar.get_vector)
+
+"""
+Magic methods
+"""
+
+
+class Employee:
+
+    def __init__(self, first_name, last_name, salary):
+        self.first_name = first_name
+        self.last_name = last_name
+        self.salary = salary
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}, {self.salary}"
+
+    def __add__(self, other):
+        """
+        adds other's salary and return's self
+        :param other:
+        :return:
+        """
+        self.salary = self.salary + other.salary
+        return self
+
+    def __len__(self):
+        """
+        returns the full name length
+        :return:
+        """
+        return len(self.first_name) + len(self.last_name) + 1
+
+
+emp1 = Employee("Bhuvana", "Ganesh", 5500)
+print("emp1 = ", emp1)
+emp2 = Employee("Ramanan", "Chid", 5000)
+print(emp2 + emp1)
+print(len(emp2))
