@@ -119,20 +119,28 @@ if __name__ == "__main__":
 
     """
     list_of_lists = get_k_subsets_of_equal_sum(3, [1, 5, 4, 2, 6, 3])
-    print(f"list of lists = {list_of_lists}")
+    print(f"1. list of lists = {list_of_lists}")
 
     list_of_lists = get_k_subsets_of_equal_sum(3, [8, 4, 2, 13])
-    print(f"list of lists = {list_of_lists}")
+    print(f"2. list of lists = {list_of_lists}")
 
     list_of_lists = get_k_subsets_of_equal_sum(3, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
-    print(f"list of lists = {list_of_lists}")
+    print(f"3. list of lists = {list_of_lists}")
 
     import random
     input_list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
     random.shuffle(input_list)
     print(f" shuffled list = {input_list}")
     list_of_lists = get_k_subsets_of_equal_sum(3, input_list)
-    print(f"list of lists = {list_of_lists}")
+    print(f"4. list of lists = {list_of_lists}")
+
+    input_list = [43, 42, 34, 31, 32, 22, 18]
+    list_of_lists = get_k_subsets_of_equal_sum(3, input_list)
+    print(f"5. list of lists = {list_of_lists}")
+
+    input_list = [43, 42, 34, 31, 32, 22, 18, 5, 1, 2, 4, 6]
+    list_of_lists = get_k_subsets_of_equal_sum(3, input_list)
+    print(f"6. list of lists = {list_of_lists}")
 
 
 
