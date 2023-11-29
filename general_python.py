@@ -113,6 +113,10 @@ third_set = frozenset({1, 5, 99})
 print(third_set)
 
 """
+TBD - set of sets, appending and returning a new set, same for list
+"""
+
+"""
 ===============================
 Dict
 =================================
