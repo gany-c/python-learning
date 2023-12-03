@@ -114,6 +114,7 @@ print(third_set)
 
 """
 TBD - set of sets, appending and returning a new set, same for list
+creating an array of fixed size with Nones
 """
 
 """
