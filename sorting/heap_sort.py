@@ -66,7 +66,7 @@ def _correct_down(in_list: list[int], heap_end: int):
             _swap(in_list, right, start)
             next_start = right
 
-        # The is already intact
+        # The heap property has been restored, pointers won't move anymore
         if next_start == start:
             break
         start = next_start
