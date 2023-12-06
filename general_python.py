@@ -115,6 +115,9 @@ print(third_set)
 """
 TBD - set of sets, appending and returning a new set, same for list
 creating an array of fixed size with Nones
+
+TBD - parsing numbers from a string
+TBD - Custom sorting of objects in a list
 """
 
 """
