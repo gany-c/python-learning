@@ -2,7 +2,20 @@ import sys
 
 print("Python Version:", sys.version)
 
-# Strings
+"""
+========================== Arithmetic ===================
+"""
+
+x = 5 % 2
+print("remainder = ", x)
+
+x = 51 / 15
+print("expect float, quotient = ", x)
+
+s = 51//15
+print("True integer division", s)
+
+# Strings =====================
 
 user_input = input()
 print(f"You typed {user_input}")
@@ -24,8 +37,23 @@ sentence = 'judas the hammer'
 for c in sentence:
     print(c)
 
+# find the numbers in a string
 """
+The Regex says 
+
+r - raw string, i.e. the slashes are not for python but for the regex
+slash d = 0-9 characters
++ - 1 or many
+"""
+senty = "there are 50 gold coins and in 7 bags"
+import re
+numbers = re.findall(r'\d+', senty)
+print("numbers from string = ", numbers)
+
+"""
+=========================================
 Logical conditions and branching
+=========================================
 """
 
 if len(user_input) > 100:
@@ -82,6 +110,28 @@ my_tuple = (1, 2, 3, 4, 5)
 from_tuple_list = list(my_tuple)
 print(f" List created from tuple = {from_tuple_list}")
 
+# Create a java style array of a certain length, initialized to Nones
+
+fixed_array = [None] * 5
+fixed_array[3] = "Black Cab"
+print("fixed Array = ", fixed_array)
+
+# Updating and returning a new list
+base_list = ["anger", "frustration", "envy", "confusion"]
+print("Will get a None: ", base_list.append("healing"))
+print("Will see the combination: ", base_list + ["healing"])
+
+
+# Custom Sorting of a list, Key and Sorted
+def custom_comp(input_str: str):
+    return len(input_str)
+
+
+# not in place update.. interesting that it removes duplicates.
+sorted_list = sorted(base_list, key=custom_comp)
+print("List sorted by length = ", sorted_list)
+
+
 """
 =================================================
 Set
@@ -112,13 +162,20 @@ print(second_set)
 third_set = frozenset({1, 5, 99})
 print(third_set)
 
-"""
-TBD - set of sets, appending and returning a new set, same for list
-creating an array of fixed size with Nones
+# Nested Sets
+set_outer = set()
+set_inner = set()
+set_inner.add(2)
+# set_outer.add(set_inner) This will not work
+set_outer.add(frozenset(set_inner))
+# so you can add only a frozen set inside a set
+print("nested set = ", set_outer)
 
-TBD - parsing numbers from a string
-TBD - Custom sorting of objects in a list
-"""
+# Append an item to a set and return a new set
+print("This is an in place updated, doesn't return anything: ", set_inner.add(33))
+
+print("This should return a new set with: ", set_inner | {33})
+
 
 """
 ===============================
