@@ -46,3 +46,4 @@ class RateLimiter:
         # What if the service is load balanced?
         # Easiest is to divide X_req by num_instances
         # Or else store the state in a DB or Remote server
+        # LB design https://www.geeksforgeeks.org/how-to-design-a-rate-limiter-api-learn-system-design/
