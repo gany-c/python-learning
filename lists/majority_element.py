@@ -47,7 +47,7 @@ def _find_majority_candidate(in_list: list[int]) -> int:
 def find_majority_element(in_list: list[int]) -> int:
     """
     The solution is 2 pass -
-    1. First pass is to find a candidate obj, cna be majority or minority
+    1. First pass is to find a candidate obj, can be majority element or most recent candidate
     2. Second pass will verify this.
     :param in_list:
     :return:

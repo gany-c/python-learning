@@ -3,6 +3,7 @@ import sys
 print("Python Version:", sys.version)
 
 """
+TBD: How do you use the REPL
 ========================== Arithmetic ===================
 """
 
