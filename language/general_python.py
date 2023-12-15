@@ -852,3 +852,27 @@ print("emp1 = ", emp1)
 emp2 = Employee("Ramanan", "Chid", 5000)
 print(emp2 + emp1)
 print(len(emp2))
+
+"""
+Need for __repr__, within a list the __str__ doesn't work
+This will print the raw object
+"""
+print([emp2])
+print({"ramanan": emp2})
+
+
+class NewEmployee(Employee):
+
+    def __repr__(self):
+        return f"{self.first_name} {self.last_name}, {self.salary}"
+
+
+"""
+1. The below prints the proper user defined string representation
+2. Secondly, the sub-class constructor is able to invoke the super-class 
+constructor without explicitly doing so.
+"""
+new_emp1 = NewEmployee("Ramanan", "Chid", 300000)
+print([new_emp1])
+print({"ramanan": new_emp1})
+
