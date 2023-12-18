@@ -3,9 +3,18 @@ import sys
 print("Python Version:", sys.version)
 
 """
-TBD: How do you use the REPL
+ How do you use the REPL
+
+REPL is just the python console:
+
+Read - from the command line
+Evaluate -
+Print - Back to the console
+Loop - you get to type in the command line again
+
 ========================== Arithmetic ===================
 """
+
 
 x = 5 % 2
 print("remainder = ", x)
