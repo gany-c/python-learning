@@ -141,6 +141,34 @@ def custom_comp(input_str: str):
 sorted_list = sorted(base_list, key=custom_comp)
 print("List sorted by length = ", sorted_list)
 
+# ================================================================
+# List Manipulation: In built methods - filter, map, lambda
+# ================================================================
+def age_sieve(age):
+    if age < 18:
+        return False
+    else:
+        return True
+
+
+ages = [5, 12, 17, 18, 24, 32]
+print("List of ages: ", ages)
+adults = filter(age_sieve, ages)
+print("$$$$$$$$$$$$$$$$$$$$$$$$ Filtered ages = ", list(adults))
+
+
+# In built - Map function
+def get_length(word):
+    return len(word)
+
+
+len_iterable = map(get_length, ('apple', 'banana', 'cherry'))
+print(len_iterable) # prints the "Map" type
+print("List of fruit lengths", list(len_iterable))
+
+# Using anonymous lambda functions
+len_iterable = map(lambda w: len(w), ('apple', 'banana', 'cherry'))
+print("List of fruit lengths, lambda", list(len_iterable))
 
 """
 =================================================
