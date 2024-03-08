@@ -6,7 +6,7 @@ import numpy as np
 # Calculate RSI
 def calculate_RSI(ticker, periods=14):
     # Download stock data
-    stock_data = yf.download(ticker, start='2023-01-01', end='2024-01-01')
+    stock_data = yf.download(ticker, start='2024-01-01', end='2024-03-01')
     delta = stock_data['Close'].diff().dropna()
     gain = delta.where(delta > 0, 0)
     loss = -delta.where(delta < 0, 0)
@@ -16,8 +16,8 @@ def calculate_RSI(ticker, periods=14):
 
     rs = avg_gain / avg_loss
     rsi = 100 - (100 / (1 + rs))
-    # print("RSI = ", rsi)
-
+    print("RSI = ", rsi)
+    print(rsi.shape)    
     return rsi[-1] if len(rsi) > 0 else np.nan
 
 tickers = []
@@ -31,8 +31,13 @@ for item in rows:
 
 print(tickers)
 ### Remove line before running
-tickers = ['JD']
+# tickers = ['JD']
 
-for ticker in tickers:
-    rsi = calculate_RSI(ticker)
-    print(ticker, rsi)
+# Open the file in write mode ('w')
+with open('output-stocks.txt', 'w') as f:
+
+    for ticker in tickers:
+        rsi = calculate_RSI(ticker)
+        if rsi <= 35:
+            f.write(f"{ticker} { rsi} \n")
+            f.flush()
