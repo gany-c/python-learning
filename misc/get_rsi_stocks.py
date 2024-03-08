@@ -2,6 +2,13 @@ import json
 import yfinance as yf
 import numpy as np
 
+"""
+Curl for file download:
+
+curl -X POST https://www.nyse.com/api/quotes/filter -H "Content-Type: application/json" -d '{"instrumentType":"EQUITY","pageNumber":1,"sortColumn":"NORMALIZED_TICKER","sortOrder":"ASC","maxResultsPerPage":7059,"filterToken":""}'
+
+
+"""
 
 # Calculate RSI
 def calculate_RSI(ticker, periods=14):
