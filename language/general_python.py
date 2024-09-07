@@ -913,3 +913,47 @@ new_emp1 = NewEmployee("Ramanan", "Chid", 300000)
 print([new_emp1])
 print({"ramanan": new_emp1})
 
+
+
+"""
+==============================================
+In Python, if a variable is declared outside of functions (in the global scope), both functions can access the variable as long as they don't try to modify it without declaring it as global. The behavior depends on whether the variable is being accessed (read) or modified (write).
+==============================================
+"""
+
+non_global_x = 10  # Global variable
+
+def func1():
+    print(non_global_x)  # Access global variable (read)
+
+def func2():
+    non_global_x = 20  # This creates a local variable x, does not modify the global x
+    print(non_global_x)  # Prints the local x
+
+func1()  # This will print 10
+func2()  # This will print 20
+print(non_global_x)  # This will still print 10 because the global x was not modified
+
+"""
+If you want to modify the global variable within a function, you need to use the global keyword:
+"""
+x = 10  # Global variable
+
+def func1():
+    global x
+    x = 20  # Modify global variable
+    print(x)
+
+func1()  # This will print 20
+print(x)  # This will also print 20 since global x was modified
+
+
+
+
+
+
+
+
+
+
+
