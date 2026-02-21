@@ -82,6 +82,7 @@ def merge_sort_recurse(in_list, start, end):
         mid = (start + end)//2
         merge_sort_recurse(in_list, start, mid)
         merge_sort_recurse(in_list, mid+1, end)
+        ## mid + 1 here is accepted as mid in the merge method
         merge(in_list, start, mid+1, end)
 
 
@@ -135,5 +136,9 @@ if __name__ == "__main__":
     print(in_list)
 
     in_list = [88, 80]
+    merge_sort(in_list)
+    print(in_list)
+
+    in_list = [3, 23, -13, 100, -5, 6]
     merge_sort(in_list)
     print(in_list)

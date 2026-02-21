@@ -1,5 +1,5 @@
 # Type in your Binary Search code here
-from math import floor
+# from math import floor
 
 
 def binary_search(input, target):
@@ -13,7 +13,8 @@ def binary_search(input, target):
     end = len(input) -1
 
     while start <= end:
-        mid = floor((start + end)/2)
+        #mid = floor((start + end)/2)
+        mid = (start + end)//2
 
         if input[mid] == target:
             return mid
@@ -22,7 +23,7 @@ def binary_search(input, target):
         else:
             end = mid - 1
 
-    print("Target not found")
+    #print("Target not found")
     return -1
 
 
@@ -33,6 +34,7 @@ if __name__ == "__main__":
     print(binary_search([6, 22, 51, 73, 189, 673, 1000, 2000], 6))
     print(binary_search([1, 3, 5, 7, 9], 9))
     input = [i for i in range(100000)]
+    print("first element in list", input[0])
     target = 55555
     print(len(input))
     print(binary_search(input, target))
