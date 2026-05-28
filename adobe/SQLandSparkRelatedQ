@@ -1,0 +1,52 @@
+'''
+Table 1: transactions
+transaction_id, product_id, units, user_id, transaction_timestamp
+
+Table 2: product_prices
+update_id, product_id, price, updated_at
+
+Write Spark code to compute:
+
+Given a date range (e.g. 2026-01-01 to 2026-03-31):
+
+Part 1:
+Total units sold per product per month within a date range
+
+Part 2:
+Compute total sales (revenue) per product per month within a date range
+
+============================GC - Your approach, didn't give a solution =======================
+Part 2 Solution:
+
+How do we join the data, if the price can vary every day? So a transaction has to match the correct price?
+
+
+Suppose we do this programmatically - Not using SQL
+
+1. for a given transaction, using the timestamp and product id, we have to find its closest earlier update.
+--- compare transaction_timestamp vs updated_at for the same product_id
+--- we will get the price
+2. add a new column called price to transactions based on that update record - create a new table or spark dataset or RDD
+
+Once this table is complete, we can do simple grouping.
+
+DATA TRANSFORMATION
+
+transaction_id, product_id, units, user_id, transaction_timestamp, => product_id_day, transaction_id, product_id, units, user_id, transaction_timestamp,
+
+product_id_day1, transaction_id, product_id, units, user_id, transaction_timestamp,
+
+
+----
+product-day1, update_id, product_id, price, updated_at =>
+
+ product-day2, update_id, product_id, price, updated_at
+
+
+'''
+======================= Interviewer's answer =====================
+
+How would you do it in SQL? what will be the join?
+
+join on product id, where transaction timestamp is greater than updated at, choose the record with the lowest updated at
+
