@@ -8,6 +8,12 @@ end_mapping = {
 
 
 def check_balanced_brackets(in_str: str) -> bool:
+    """
+    An array is used as stack:
+    Append = push, peek is [-1], pop is pop()
+    :param in_str:
+    :return:
+    """
 
     stack = []
 
