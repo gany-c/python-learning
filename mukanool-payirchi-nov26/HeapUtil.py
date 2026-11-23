@@ -11,26 +11,31 @@ class MinHeap:
         self.last_index = -1
 
     def _correct_down(self, index):
+        """
+        Originally did this with recursions on both left and right
+        That's correct, but not optimal.
+        :param index:
+        :return:
+        """
 
         left_index = 2 * index + 1
         if left_index > self.last_index:
             return
 
-        if self.store[left_index] < self.store[index]:
-            temp = self.store[left_index]
-            self.store[left_index] = self.store[index]
-            self.store[index] = temp
-            self._correct_down(left_index)
+        smaller_index = left_index
 
         right_index = 2 * index + 2
         if right_index <= self.last_index:
-            if self.store[right_index] < self.store[index]:
-                temp = self.store[right_index]
-                self.store[right_index] = self.store[index]
-                self.store[index] = temp
-                self._correct_down(right_index)
+            if self.store[left_index] > self.store[right_index]:
+                smaller_index = right_index
 
-    def dequeue(self) -> int:
+        if self.store[smaller_index] < self.store[index]:
+            temp = self.store[smaller_index]
+            self.store[smaller_index] = self.store[index]
+            self.store[index] = temp
+            self._correct_down(smaller_index)
+
+    def dequeue(self) -> "int|None":
         """
         We return the lowest element, i.e. the top most element
         1. save the top most element
@@ -62,8 +67,11 @@ class MinHeap:
                 temp = self.store[parent]
                 self.store[parent] = self.store[i]
                 self.store[i] = temp
-            i = i - 1
-            # mistake: forgot this step
+                i = parent
+            else:
+                break
+            # mistake: forgot to decrement i
+            # optimization: set i equal to parent or break
 
     def enqueue(self, elem: int):
         """
