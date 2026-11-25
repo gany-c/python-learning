@@ -17,7 +17,8 @@ def push_zeroes_to_end(in_list: List[int]) -> List[int]:
 
     while i < j:
 
-        # mistake made, you didn't check the bounds
+        # mistake made, you didn't check the bou
+        # nds
         # what if no zeroes are there
         while i < len(in_list) and in_list[i] != 0:
             i = i + 1
@@ -27,6 +28,15 @@ def push_zeroes_to_end(in_list: List[int]) -> List[int]:
         while j >= 0 and in_list[j] == 0:
             j = j - 1
 
+        """
+        It is possible here that we don't process the central element.
+        i.e. if I and J converge on a single value, we don't end up comparing
+        it against anything. 
+        
+        This is fine, because being 0 or non 0 doesn't matter at the border
+        
+        It will matter in the quick sort pivot case.
+        """
         if i < j:
             swap(in_list, i, j)
 
